@@ -5,15 +5,15 @@ export default function index(props: PricingList) {
   const { id, title, price, description, details } = props;
   return (
     <>
-      <div className="card">
-        <div className="card-body">
-          <div className="card-title">{title}</div>
+      <div className="card relative block bg-white max-w-xs mx-auto mb-24 border border-gray-300 rounded-lg">
+        <div className=" py-8 px-7">
+          <div className="mb-4 text-secondary font-bold text-2xl text-center">{title}</div>
           <div className="flex justify-center items-center">
-            <span className="currency">Rp</span>
-            <span className="value">{price}</span>
+            <span className=" mr-1 text-gray-700 text-3xl">Rp</span>
+            <span className=" text-gray-700 font-semibold text-7xl text-center">{price}</span>
           </div>
-          <div className="frequency">/bulan</div>
-          <p>{description}</p>
+          <div className=" mb-6 text-xl text-center">/bulan</div>
+          <p className=" mb-5 text-left">{description}</p>
           <ul className="space-y-2 text-left list">
             {details.map((item, i) => (
               <li key={i} className="flex flex-col h-full justify-between">
@@ -25,8 +25,8 @@ export default function index(props: PricingList) {
               </li>
             ))}
           </ul>
-          <div className="button-wrapper">
-            <Link className="btn-solid-reg page-scroll" href="/payment">
+          <div className=" absolute right-0 left-0 -bottom-6">
+            <Link className="btn-solid-reg page-scroll hover:bg-white" href="/payment">
               Beli sekarang
             </Link>
           </div>

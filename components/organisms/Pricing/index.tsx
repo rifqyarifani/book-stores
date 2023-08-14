@@ -7,7 +7,7 @@ export default function index() {
 
   return (
     <>
-      <div id="pricing" className="cards-2">
+      <div id="pricing" className=" cards-2 relative pt-20 bg-cover text-center">
         <div className="absolute bottom-0 w-full h-40 bg-white"></div>
         <div className="container px-4 pb-px sm:px-8">
           <h2 className="mb-2.5 text-white lg:max-w-xl lg:mx-auto">
@@ -17,7 +17,7 @@ export default function index() {
             Kami mempunyai berbagai paket yang bisa menjadi pilihan anda. Pilih
             paket premium favoritmu. Unduh dan baca sepuasnya tanpa henti.
           </p>
-          <div className="flex flex-col lg:flex-row justify-center lg:flex-wrap lg:gap-8">
+          <div className="flex flex-col lg:flex-row justify-center lg:flex-wrap lg:gap-12">
             {Object.keys(pricing).length > 0 &&
               pricing.map((item, i) => (
                 <div key={i}>
