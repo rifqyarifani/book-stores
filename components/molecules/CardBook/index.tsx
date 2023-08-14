@@ -12,17 +12,11 @@ export default function index(props: Props) {
 
   return (
     <>
-      <Link href={`/categories/${category}`} className="card">
-        <div className="mx-5 mb-4">
-          <img src= {images} alt="alternative" className="rounded-2xl"/>
+      <Link href={`/categories/${category}`} className=" flex flex-col items-center mb-8 bg-third rounded-2xl p-4 duration-300 hover:bg-secondary">
+        <div className=" mb-4">
+          <img src= {images} alt="alternative" className=" rounded-2xl"/>
         </div>
-        <div className="card-body">
-          <h5 className="card-title">{category}</h5>
-          <p className="mb-4">
-            You sales force can use the app on any smartphone platform without
-            compatibility issues
-          </p>
-        </div>
+          <h5 className="">{category}</h5>
       </Link>
     </>
   );
