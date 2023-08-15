@@ -47,17 +47,17 @@ export default function Navbar() {
           >
             <ul className="flex flex-col pl-0 mt-3 mb-2 ml-auto list-none lg:mt-0 lg:mb-0 lg:flex-row">
               <li>
-                <Link className="nav-link page-scroll" href="/">
+                <Link className="nav-link page-scroll" href="/#header" scroll={false}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link className="nav-link page-scroll" href="#features">
+                <Link className="nav-link page-scroll" href="/#features" scroll={false}>
                   Category
                 </Link>
               </li>
               <li>
-                <Link className="nav-link page-scroll" href="/profile">
+                <Link className="nav-link page-scroll" href="/profile" scroll={false}>
                   Profile
                 </Link>
               </li>
