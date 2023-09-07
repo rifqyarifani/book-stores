@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardBookCategory from "@/components/molecules/CardBookCategory";
 import Navbar from "@/components/organisms/Navbar";
-import { fetchApi } from "@/components/services";
+import { fetchApi } from "@/services";
 
 export default function allbook() {
   const [dataList, setDataList] = useState([] as bookDetails[]);

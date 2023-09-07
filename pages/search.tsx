@@ -2,7 +2,7 @@ import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchApi } from "@/components/services";
+import { fetchApi } from "@/services";
 import Link from "next/link";
 
 const search = () => {

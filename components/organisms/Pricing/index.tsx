@@ -1,6 +1,6 @@
 import React from "react";
 import CardPricing from "@/components/molecules/CardPricing";
-import pricingList from "@/components/services/pricing";
+import pricingList from "@/services/pricing";
 
 export default function index() {
   const pricing = pricingList;

@@ -33,7 +33,7 @@ const payment = () => {
                     Nomor Rekening
                   </label>
                   <input
-                    className="flex items-center h-10 border mt-1 rounded px-4 w-full text-sm"
+                    className="flex items-center h-10 border mt-1 rounded px-4 w-full text-sm [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     type="number"
                     placeholder="Masukan nomor rekening anda"
                   />

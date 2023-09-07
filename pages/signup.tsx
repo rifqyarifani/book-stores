@@ -14,17 +14,21 @@ export default function Signup() {
             <h1 className="mb-8 text-3xl">Buat Akun</h1>
             <form action="Login" className="flex flex-col">
               <label htmlFor="email" className="mb-2 font-light text-gray-600">Email Address</label>
-              <input type="email" id="email" className="mb-2 font-light border-b-2 outline-none focus:border-b-2 focus:border-blue-400" required />
+              <input type="email" id="email" className="mb-2 font-light border-b-2 outline-none focus:border-b-2 focus:border-secondary" required />
+              <label htmlFor="nama" className="mb-2 font-light text-gray-600">Nama</label>
+              <input type="text" id="nama" className="mb-2 font-light border-b-2 outline-none focus:border-b-2 focus:border-secondary" required />
               <label htmlFor="password" className="mb-2 font-light text-gray-600">Password</label>
-              <input type="password" id="password" className="font-light border-b-2 outline-none focus:border-b-2 focus:border-blue-400" required />
-              <label htmlFor="telepon" className="mb-2 font-light text-gray-600">Nomor Telepon</label>
+              <input type="password" id="password" className="font-light border-b-2 outline-none focus:border-b-2 focus:border-secondary" required />
+              <label htmlFor="konfirmasiPassword" className="mb-2 font-light text-gray-600">Konfirmasi Password</label>
+              <input type="password" id="konfirmasiPassword" className="font-light border-b-2 outline-none focus:border-b-2 focus:border-secondary" required />
+              <label htmlFor="telepon" className="mb-2 font-light text-gray-600">Nomor Telepon (optional)</label>
               <input
                 type="number"
                 id="telepon"
-                className="border-b-2 font-light focus:border-b-2 focus:border-blue-400 outline-none [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                className="border-b-2 font-light focus:border-b-2 focus:border-secondary outline-none [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                 required
               />
-              <button type="submit" className="p-2 my-8 text-gray-600 bg-gray-200 rounded-full">Daftar Sekarang</button>
+              <button type="submit" className="p-2 my-8 text-gray-600 bg-gray-200 rounded-full btn-solid-lg secondary">Daftar Sekarang</button>
             </form>
             <p className="mb-8 text-center">Sudah punya akun? <span><Link href="/signin" className="font-semibold text-blue-600">Masuk</Link></span></p>
           </div>

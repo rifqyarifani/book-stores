@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardBookCategory from "@/components/molecules/CardBookCategory";
 import Link from "next/link";
-import { fetchApi } from "@/components/services";
+import { fetchApi } from "@/services";
 
 export default function index() {
   const [dataList, setDataList] = useState([] as bookDetails[]);
