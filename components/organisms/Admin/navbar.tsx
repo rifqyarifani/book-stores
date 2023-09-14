@@ -47,29 +47,21 @@ export default function Navbar() {
           >
             <ul className="flex flex-col pl-0 mt-3 mb-2 ml-auto list-none lg:mt-0 lg:mb-0 lg:flex-row">
               <li>
-                <Link className="nav-link page-scroll" href="/#header" scroll={false}>
-                  Home
+                <Link className="nav-link page-scroll" href="/admin/books" scroll={false}>
+                  Books
                 </Link>
               </li>
               <li>
-                <Link className="nav-link page-scroll" href="/#features" scroll={false}>
-                  Category
+                <Link className="nav-link page-scroll" href="/admin/transactions" scroll={false}>
+                  Transactions
                 </Link>
               </li>
               <li>
-                <Link className="nav-link page-scroll" href="/profile" scroll={false}>
-                  Profile
+                <Link className="nav-link page-scroll" href="/admin/pricing" scroll={false}>
+                  Pricing
                 </Link>
               </li>
             </ul>
-            <span className="sm:ml-3">
-              <Link
-                href="/signup"
-                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get Started
-              </Link>
-            </span>
           </div>
         </div>
       </nav>

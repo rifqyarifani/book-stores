@@ -800,14 +800,14 @@ input[type="checkbox"] {
     border-radius: 12px; */
 }
 
-.slider-1 .card-image {
-  /* width: 90px;
-    height: 120px; */
-  /* margin-right: auto;
+/* .slider-1 .card-image {
+  width: 90px;
+    height: 120px;
+  margin-right: auto;
     margin-bottom: 1.25rem;
-    margin-left: auto; */
-  /*border-radius: 50%;*/
-}
+    margin-left: auto; 
+  border-radius: 50%;
+} */
 
 .slider-1 .testimonial-author {
   margin-bottom: 0;
