@@ -53,5 +53,7 @@ export const getBooksByCategory = async (name: string) => {
       process.env.NEXT_PUBLIC_BASE_URL + `/api/book/categories/${encodedName}`
     );
     return result.data;
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };

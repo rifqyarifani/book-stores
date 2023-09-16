@@ -9,7 +9,9 @@ export default function allbook() {
 
   const getData = async () => {
     const data = await getAllBooks();
-    setDataList(data.data);
+    if (data) {
+      setDataList(data.data);
+    }
   };
 
   useEffect(() => {

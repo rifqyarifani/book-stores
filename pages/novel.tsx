@@ -10,7 +10,7 @@ export default function novel() {
   const [bookList, setBookList] = useState([]);
 
   const allBooks = async () => {
-    const result: any = await getBooksByCategory("fiksi");
+    const result: any = await getBooksByCategory("fiksii");
     setBookList(result);
   };
 

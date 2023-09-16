@@ -8,8 +8,10 @@ export default function index() {
 
   const getData = async () => {
     const data = await getAllBooks();
-    const selectedData = data.data.slice(0, 6);
-    setDataList(selectedData);
+    if (data) {
+      const selectedData = data.data.slice(0, 6);
+      setDataList(selectedData);
+    }
   };
 
   useEffect(() => {
