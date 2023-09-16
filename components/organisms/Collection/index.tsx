@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CardBookCategory from "@/components/molecules/CardBookCategory";
 import Link from "next/link";
-import { fetchApi } from "@/services";
+import { getAllBooks } from "@/services/book.services";
 
 export default function index() {
   const [dataList, setDataList] = useState([] as bookDetails[]);
 
   const getData = async () => {
-    const data = await fetchApi();
-    const selectedData = data.slice(0, 6);
+    const data = await getAllBooks();
+    const selectedData = data.data.slice(0, 6);
     setDataList(selectedData);
   };
 
@@ -33,10 +33,10 @@ export default function index() {
                 <CardBookCategory
                   id={item.id}
                   title={item.title}
-                  penulis={item.penulis}
-                  deskripsi={item.deskripsi}
-                  images={item.images}
-                  kategori={item.kategori}
+                  author={item.author}
+                  description={item.description}
+                  image={item.image}
+                  category_id={item.category_id}
                 />
               </div>
             ))}

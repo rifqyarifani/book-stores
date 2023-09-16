@@ -1,8 +1,8 @@
 interface bookDetails {
   id: number;
-  images: string;
   title: string;
-  penulis: string;
-  kategori: string;
-  deskripsi: string;
+  image: string;
+  author: string;
+  category_id: string;
+  description: string;
 }
