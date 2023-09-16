@@ -2,12 +2,11 @@ import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchApi } from "@/services";
 import Link from "next/link";
+import { searchBook } from "@/services/book.services";
 
 const search = () => {
   const [dataList, setDataList] = useState([] as bookDetails[]);
-  const [searchBooksList, setSearchBooksList] = useState([] as bookDetails[]);
   const [inputSearch, setInputSearch] = useState<string>();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,21 +15,18 @@ const search = () => {
     setInputSearch(inputRef.current?.value);
   };
 
-  const getData = async () => {
-    const data = await fetchApi();
-    setDataList(data);
+  const getData = async (param: string) => {
+    const data = await searchBook(param);
+    if (data.data) {
+      setDataList(data.data);
+    }
   };
   useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const result = dataList.filter((book) =>
-      book.title.toLowerCase().includes(inputSearch?.toLowerCase() as string)
-    );
-    setSearchBooksList(result);
+    if (inputSearch !== undefined) {
+      const param = inputSearch;
+      getData(param);
+    }
   }, [inputSearch]);
-
 
   return (
     <>
@@ -64,7 +60,7 @@ const search = () => {
                 <Link href={`/book/${item.id}`}>
                   <img
                     className="m-auto mt-8 mb-4 overflow-hidden w-36 h-44"
-                    src={".././images" + "/" + item.images}
+                    src={"../" + item.image}
                     alt="picturebook"
                   />
                 </Link>
@@ -72,9 +68,9 @@ const search = () => {
                   <h5 className="overflow-hidden overflow-ellipsis whitespace-nowrap">
                     {item.title}
                   </h5>
-                  <p className="">{item.penulis}</p>
+                  <p className="">{item.author}</p>
                   <p className="overflow-hidden overflow-ellipsis whitespace-nowrap p-small">
-                    {item.deskripsi}
+                    {item.description}
                   </p>
                   <span className="rating-more">
                     <img className="rating" src="/svg/star5.svg" alt="Rating" />
@@ -85,7 +81,7 @@ const search = () => {
                 </div>
               </div>
             ))}
-          {searchBooksList.map((item) => (
+          {dataList.map((item) => (
             <div
               className="relative overflow-hidden bg-white shadow-md rounded-xl"
               key={item.id}
@@ -93,7 +89,7 @@ const search = () => {
               <Link href={`/book/${item.id}`}>
                 <img
                   className="m-auto mt-8 mb-4 overflow-hidden w-36 h-44"
-                  src={".././images" + "/" + item.images}
+                  src={"../" + item.image}
                   alt="picturebook"
                 />
               </Link>
@@ -101,9 +97,9 @@ const search = () => {
                 <h5 className="overflow-hidden overflow-ellipsis whitespace-nowrap">
                   {item.title}
                 </h5>
-                <p className="">{item.penulis}</p>
+                <p className="">{item.author}</p>
                 <p className="overflow-hidden overflow-ellipsis whitespace-nowrap p-small">
-                  {item.deskripsi}
+                  {item.description}
                 </p>
                 <span className="rating-more">
                   <img className="rating" src="/svg/star5.svg" alt="Rating" />
