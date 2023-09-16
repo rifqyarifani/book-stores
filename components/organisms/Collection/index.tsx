@@ -8,7 +8,7 @@ export default function index() {
 
   const getData = async () => {
     const data = await getAllBooks();
-    if (data) {
+    if (data.data) {
       const selectedData = data.data.slice(0, 6);
       setDataList(selectedData);
     }

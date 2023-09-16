@@ -9,7 +9,7 @@ export default function allbook() {
 
   const getData = async () => {
     const data = await getAllBooks();
-    if (data) {
+    if (data.data) {
       setDataList(data.data);
     }
   };
