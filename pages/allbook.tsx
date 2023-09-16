@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CardBookCategory from "@/components/molecules/CardBookCategory";
 import Navbar from "@/components/organisms/Navbar";
-import { fetchApi } from "@/services";
+import Footer from "@/components/organisms/Footer";
+import { getAllBooks } from "@/services/book.services";
 
 export default function allbook() {
   const [dataList, setDataList] = useState([] as bookDetails[]);
 
   const getData = async () => {
-    const data = await fetchApi();
-    setDataList(data);
+    const data = await getAllBooks();
+    setDataList(data.data);
   };
 
   useEffect(() => {
@@ -31,10 +32,10 @@ export default function allbook() {
                     <CardBookCategory
                       id={item.id}
                       title={item.title}
-                      penulis={item.penulis}
-                      deskripsi={item.deskripsi}
-                      images={item.images}
-                      kategori={item.kategori}
+                      author={item.author}
+                      description={item.description}
+                      image={item.image}
+                      category_id={item.category_id}
                     />
                   </div>
                 ))}
@@ -44,10 +45,10 @@ export default function allbook() {
                     <CardBookCategory
                       id={item.id}
                       title={item.title}
-                      penulis={item.penulis}
-                      deskripsi={item.deskripsi}
-                      images={item.images}
-                      kategori={item.kategori}
+                      author={item.author}
+                      description={item.description}
+                      image={item.image}
+                      category_id={item.category_id}
                     />
                   </div>
                 ))}
@@ -55,6 +56,7 @@ export default function allbook() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
