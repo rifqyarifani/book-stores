@@ -95,3 +95,30 @@ export const updateUserDetails = async (
     callback(false, error);
   }
 };
+
+type PasswordData = {
+  old_password: string;
+  new_password: string;
+};
+
+export const changePassword = async (
+  token: string,
+  data: PasswordData,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const result = await axios.put(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/user/password",
+      data,
+      config
+    );
+
+    callback(true, result);
+  } catch (error) {
+    callback(false, error);
+  }
+};

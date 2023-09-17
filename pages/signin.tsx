@@ -24,14 +24,12 @@ type LoginData = {
 export default function Signin() {
   const [, setCookie] = useCookies(["token"]);
 
-  const router = useRouter();
-
   const handleLogin = (data: LoginData) => {
     login(data, (status: boolean, res: Res) => {
       if (status) {
         alert("login berhasil");
         setCookie("token", res.token, { maxAge: 3600 });
-        router.push("/");
+        window.location.href = "/";
       } else {
         alert("login gagal");
         console.log(res.response?.data.message);

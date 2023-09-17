@@ -15,6 +15,7 @@ export default function Signup() {
     register(data, (status: boolean, res: User) => {
       if (status) {
         alert("register berhasil");
+        window.location.href = "/signin";
       } else {
         alert("register gagal");
       }

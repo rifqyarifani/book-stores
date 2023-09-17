@@ -3,27 +3,31 @@ import FormInput from "@/components/atoms/Profile/FormInput";
 import FormLabel from "@/components/atoms/Profile/FormLabel";
 import React from "react";
 
-export default function FormPassword() {
+type Props = {
+  handleChangePassword: React.FormEventHandler<HTMLFormElement>;
+};
+
+export default function FormPassword(props: Props) {
   return (
-    <form>
+    <form onSubmit={props.handleChangePassword}>
       <div className="flex flex-col">
-        <FormLabel label="Password Lama" name="oldPassword" />
+        <FormLabel label="Password Lama" name="old_password" />
         <FormInput
           type="password"
-          name="oldPassword"
+          name="old_password"
           placeholder="Masukan password lama"
           focus={true}
         />
-        <FormLabel label="Password Baru" name="newPassword" />
+        <FormLabel label="Password Baru" name="new_password" />
         <FormInput
           type="password"
-          name="newPassword"
+          name="new_password"
           placeholder="Masukan password baru"
         />
-        <FormLabel label="Konfirmasi Password" name="confirmNewPassword" />
+        <FormLabel label="Konfirmasi Password" name="confirmation_password" />
         <FormInput
           type="password"
-          name="confirmNewPassword"
+          name="confirmation_password"
           placeholder="Konfirmasi password baru"
         />
       </div>

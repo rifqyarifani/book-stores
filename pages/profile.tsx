@@ -9,6 +9,7 @@ import Transactions from "@/components/organisms/Profile/Transactions";
 import Password from "@/components/organisms/Profile/Password";
 import BtnShowMenuMobile from "@/components/atoms/Profile/Button/BtnShowMenuMobile";
 import {
+  changePassword,
   getUserDetails,
   updateUserDetails,
   uploadAvatar,
@@ -74,6 +75,38 @@ export default function profile() {
     });
   };
 
+  const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const old_password = e.currentTarget.old_password.value;
+    const new_password = e.currentTarget.new_password.value;
+    const confirmation_password = e.currentTarget.confirmation_password.value;
+
+    if (!old_password || !new_password || !confirmation_password) {
+      alert("Semua field harus diisi!");
+      return;
+    }
+
+    if (new_password !== confirmation_password) {
+      alert("Konfirmasi password salah");
+      return;
+    }
+
+    const data = {
+      old_password: old_password,
+      new_password: new_password,
+    };
+
+    changePassword(cookie.token, data, (status: boolean, res: any) => {
+      if (status) {
+        alert("Berhasil mengubah password");
+        window.location.href = "/profile";
+        return;
+      } else {
+        alert(res.response?.data.message);
+      }
+    });
+  };
+
   useEffect(() => {
     userDetails();
   }, []);
@@ -102,7 +135,9 @@ export default function profile() {
           )}
           {isActiveIndex === 2 && <Subscription />}
           {isActiveIndex === 3 && <Transactions />}
-          {isActiveIndex === 4 && <Password />}
+          {isActiveIndex === 4 && (
+            <Password handleChangePassword={handleChangePassword} />
+          )}
         </div>
       </div>
       <Footer />

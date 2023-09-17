@@ -1,11 +1,15 @@
 import FormPassword from "@/components/molecules/Profile/FormPassword";
 import React from "react";
 
-export default function Password() {
+type Props = {
+  handleChangePassword: React.FormEventHandler<HTMLFormElement>;
+};
+
+export default function Password(props: Props) {
   return (
     <>
       <h1 className="text-center mb-16">Ubah Password</h1>
-      <FormPassword />
+      <FormPassword handleChangePassword={props.handleChangePassword} />
     </>
   );
 }
