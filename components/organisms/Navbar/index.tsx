@@ -48,17 +48,17 @@ export default function Navbar() {
             <ul className="flex flex-col pl-0 mt-3 mb-2 ml-auto list-none lg:mt-0 lg:mb-0 lg:flex-row">
               <li>
                 <Link className="nav-link page-scroll" href="/#header" scroll={false}>
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li>
                 <Link className="nav-link page-scroll" href="/#features" scroll={false}>
-                  Category
+                  Kategori
                 </Link>
               </li>
               <li>
                 <Link className="nav-link page-scroll" href="/profile" scroll={false}>
-                  Profile
+                  Profil
                 </Link>
               </li>
             </ul>
@@ -67,7 +67,7 @@ export default function Navbar() {
                 href="/signup"
                 className="inline-flex items-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get Started
+                Masuk
               </Link>
             </span>
           </div>
