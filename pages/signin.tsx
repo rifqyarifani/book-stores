@@ -6,19 +6,35 @@ import { login } from "@/services/user.services";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
+type Res = {
+  message: string;
+  token?: string;
+  response?: {
+    data: {
+      message: string;
+    };
+  };
+};
+
+type LoginData = {
+  email: string;
+  password: string;
+};
+
 export default function Signin() {
   const [, setCookie] = useCookies(["token"]);
 
   const router = useRouter();
 
-  const handleLogin = (data: User) => {
-    login(data, (status: boolean, res: Response) => {
+  const handleLogin = (data: LoginData) => {
+    login(data, (status: boolean, res: Res) => {
       if (status) {
         alert("login berhasil");
         setCookie("token", res.token, { maxAge: 3600 });
         router.push("/");
       } else {
         alert("login gagal");
+        console.log(res.response?.data.message);
       }
     });
   };

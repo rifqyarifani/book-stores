@@ -7,10 +7,12 @@ type Props = {
   setIsActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   showMenu: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  data: User;
 };
 
 export default function Menu(props: Props) {
-  const { isActiveIndex, setIsActiveIndex, showMenu, setShowMenu } = props;
+  const { isActiveIndex, setIsActiveIndex, showMenu, setShowMenu, data } =
+    props;
 
   const showMenuStyle = () => {
     if (showMenu) {
@@ -23,8 +25,13 @@ export default function Menu(props: Props) {
       className={`${showMenuStyle()} w-full fixed lg:relative top-12 lg:top-0 left-0 bottom-0 right-0 px-4 sm:px-8 lg:px-0 pt-8 lg:pt-0 bg-white lg:pr-8 lg:w-1/4 lg:translate-x-0 duration-300`}
     >
       <div className="lg:sticky lg:top-20">
-        <ProfilePicture w={64} h={64} classname="rounded-full" />
-        <p className="text-center font-bold text-black py-2">User Satu</p>
+        <ProfilePicture
+          w={64}
+          h={64}
+          classname="rounded-full"
+          src={data.avatar}
+        />
+        <p className="text-center font-bold text-black py-2">{data.name}</p>
         <MenuNav
           isActiveIndex={isActiveIndex}
           setIsActiveIndex={setIsActiveIndex}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Menu from "@/components/organisms/Profile/Menu";
 import Footer from "@/components/organisms/Footer";
@@ -8,10 +8,26 @@ import Subscription from "@/components/organisms/Profile/Subscription";
 import Transactions from "@/components/organisms/Profile/Transactions";
 import Password from "@/components/organisms/Profile/Password";
 import BtnShowMenuMobile from "@/components/atoms/Profile/Button/BtnShowMenuMobile";
+import { getUserDetails } from "@/services/user.services";
+import { useCookies } from "react-cookie";
 
 export default function profile() {
   const [isActiveIndex, setIsActiveIndex] = useState(1);
   const [showMenu, setShowMenu] = useState(false);
+  const [userData, setUserData] = useState({} as User);
+  const [cookie] = useCookies(["token"]);
+
+  const userDetails = () => {
+    getUserDetails(cookie.token as string, (status: boolean, res: any) => {
+      if (status) {
+        setUserData(res.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    userDetails();
+  }, []);
 
   return (
     <>
@@ -24,9 +40,10 @@ export default function profile() {
           setShowMenu={setShowMenu}
           isActiveIndex={isActiveIndex}
           setIsActiveIndex={setIsActiveIndex}
+          data={userData}
         />
         <div className="w-full border-gray-300 lg:border-l lg:pl-8 lg:w-3/4">
-          {isActiveIndex === 1 && <Settings />}
+          {isActiveIndex === 1 && <Settings data={userData} />}
           {isActiveIndex === 2 && <Subscription />}
           {isActiveIndex === 3 && <Transactions />}
           {isActiveIndex === 4 && <Password />}

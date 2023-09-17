@@ -4,8 +4,14 @@ import Navbar from "@/components/organisms/Navbar";
 import Link from "next/link";
 import { register } from "@/services/user.services";
 
+type RegisterData = {
+  email: string;
+  name: string;
+  password: string;
+};
+
 export default function Signup() {
-  const handleRegister = (data: User) => {
+  const handleRegister = (data: RegisterData) => {
     register(data, (status: boolean, res: User) => {
       if (status) {
         alert("register berhasil");

@@ -1,5 +1,5 @@
 interface Response {
   message: string;
-  data?: {} | [] | null | undefined;
+  data?: {} | [] | null;
   token?: string;
 }

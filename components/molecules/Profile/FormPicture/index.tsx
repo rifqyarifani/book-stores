@@ -2,10 +2,14 @@ import { BtnSolidReg } from "@/components/atoms/Profile/Button/BtnSolid";
 import ProfilePicture from "@/components/atoms/Profile/Menu/ProfilePicture";
 import React from "react";
 
-export default function FormPicture() {
+type Props = {
+  src: string | undefined;
+};
+
+export default function FormPicture(props: Props) {
   return (
     <div className="flex flex-col items-center">
-      <ProfilePicture w={210} h={210} />
+      <ProfilePicture w={210} h={210} src={props.src} />
       <form className="flex flex-col items-center gap-4 pt-4 pb-10">
         <label htmlFor="picture" className="font-semibold text-black">
           Ganti gambar
