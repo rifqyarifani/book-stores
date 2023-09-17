@@ -2,8 +2,39 @@ import React from "react";
 import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Link from "next/link";
+import { login } from "@/services/user.services";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 export default function Signin() {
+  const [, setCookie] = useCookies(["token"]);
+
+  const router = useRouter();
+
+  const handleLogin = (data: User) => {
+    login(data, (status: boolean, res: Response) => {
+      if (status) {
+        alert("login berhasil");
+        setCookie("token", res.token, { maxAge: 3600 });
+        router.push("/");
+      } else {
+        alert("login gagal");
+      }
+    });
+  };
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    const data = {
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value,
+    };
+    handleLogin(data);
+  };
+
   return (
     <>
       <Navbar />
@@ -12,7 +43,7 @@ export default function Signin() {
         <main className="w-full px-8 m-0 md:w-1/2">
           <div>
             <h1 className="mb-8 text-3xl">Masuk</h1>
-            <form action="Login" className="flex flex-col">
+            <form onSubmit={handleSubmit} className="flex flex-col">
               <label htmlFor="email" className="mb-2 font-light text-gray-600">
                 Email Address
               </label>

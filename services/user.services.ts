@@ -11,3 +11,15 @@ export const register = async (data: User, callback: Function) => {
     callback(false, error);
   }
 };
+
+export const login = async (data: User, callback: Function) => {
+  try {
+    const result = await axios.post(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/user/login",
+      data
+    );
+    callback(true, result.data);
+  } catch (error) {
+    callback(false, error);
+  }
+};
