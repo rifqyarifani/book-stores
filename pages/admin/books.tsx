@@ -10,7 +10,12 @@ const Books = () => {
     <>
       <Navbar/>
       <div className=' mt-20'>
-        <h1 className=' text-center text-regular'>Books</h1>
+        <div className=' flex items-center justify-center relative'>
+          <h1 className=' text-center text-regular'>Books</h1>
+          <Link className=' nav-link page-scroll absolute right-32' href="/admin/books/create">
+            <MdOutlineAddBox className=" text-regular text-4xl right-0" />
+          </Link>
+        </div>
         <table className=" w-5/6 border-separate border-spacing-2 mx-auto">
           <thead>
             <tr>
