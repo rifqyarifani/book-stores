@@ -23,15 +23,31 @@ export default function FormData(props: Props) {
 
   let displayValue: string;
   if (type === "number") {
-    displayValue = `+62${value}`;
+    if (value == null) {
+      displayValue = "Belum diubah";
+    } else {
+      displayValue = `+62${value}`;
+    }
   } else if (type === "select") {
     if (value === "male") {
       displayValue = "Laki-laki";
-    } else {
+    } else if (value === "female") {
       displayValue = "Perempuan";
+    } else {
+      displayValue = "Belum diubah";
+    }
+  } else if (type === "date") {
+    if (value) {
+      displayValue = value as string;
+    } else {
+      displayValue = "Belum diubah";
     }
   } else {
-    displayValue = value as string;
+    if (value === null) {
+      displayValue = "Belum diubah";
+    } else {
+      displayValue = value as string;
+    }
   }
 
   return (
