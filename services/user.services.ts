@@ -49,3 +49,28 @@ export const getUserDetails = async (token: string, callback: Function) => {
     callback(false, error);
   }
 };
+
+export const uploadAvatar = async (
+  token: string,
+  avatar: File,
+  callback: Function
+) => {
+  try {
+    const form = new FormData();
+    form.append("avatar", avatar);
+
+    const result = await axios.post(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/user/avatar",
+      form,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    callback(true, result);
+  } catch (error) {
+    callback(false, error);
+  }
+};

@@ -3,17 +3,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 export default function index(props: PricingList) {
-
   const { id, title, price, description, details } = props;
 
   const [getPrice, setPrice] = useState([]);
 
   const priceButton = () => {
-    setPrice([
-    ])
-    console.log("Button clicked")
-  }
-
+    setPrice([]);
+    console.log("Button clicked");
+  };
 
   return (
     <>
@@ -44,7 +41,7 @@ export default function index(props: PricingList) {
           <div className=" absolute right-0 left-0 -bottom-6">
             <Link
               className="btn-solid-reg page-scroll hover:bg-white"
-              href="/payment"
+              href={`/payment?id=${id}`}
               onClick={() => priceButton()}
             >
               Beli sekarang

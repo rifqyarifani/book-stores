@@ -8,13 +8,14 @@ import Subscription from "@/components/organisms/Profile/Subscription";
 import Transactions from "@/components/organisms/Profile/Transactions";
 import Password from "@/components/organisms/Profile/Password";
 import BtnShowMenuMobile from "@/components/atoms/Profile/Button/BtnShowMenuMobile";
-import { getUserDetails } from "@/services/user.services";
+import { getUserDetails, uploadAvatar } from "@/services/user.services";
 import { useCookies } from "react-cookie";
 
 export default function profile() {
   const [isActiveIndex, setIsActiveIndex] = useState(1);
   const [showMenu, setShowMenu] = useState(false);
   const [userData, setUserData] = useState({} as User);
+
   const [cookie] = useCookies(["token"]);
 
   const userDetails = () => {
@@ -23,6 +24,24 @@ export default function profile() {
         setUserData(res.data);
       }
     });
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files as FileList;
+    const test = file?.[0];
+
+    uploadAvatar(cookie.token, test, (status: boolean, res: any) => {
+      if (status) {
+        console.log("berhasil upload gambar", res);
+      } else {
+        console.log(res);
+      }
+    });
+  };
+
+  const handleUploadAvatar = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert("fitur masih belum bisa digunakan");
   };
 
   useEffect(() => {
@@ -43,7 +62,13 @@ export default function profile() {
           data={userData}
         />
         <div className="w-full border-gray-300 lg:border-l lg:pl-8 lg:w-3/4">
-          {isActiveIndex === 1 && <Settings data={userData} />}
+          {isActiveIndex === 1 && (
+            <Settings
+              data={userData}
+              handleUploadAvatar={handleUploadAvatar}
+              handleFileUpload={handleFileUpload}
+            />
+          )}
           {isActiveIndex === 2 && <Subscription />}
           {isActiveIndex === 3 && <Transactions />}
           {isActiveIndex === 4 && <Password />}

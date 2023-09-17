@@ -4,13 +4,19 @@ import React from "react";
 
 type Props = {
   data: User;
+  handleUploadAvatar: React.FormEventHandler<HTMLFormElement>;
+  handleFileUpload: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export default function Settings(props: Props) {
   return (
     <>
       <h1 className="text-center mb-16">Profil Pengguna</h1>
-      <FormPicture src={props.data.avatar} />
+      <FormPicture
+        src={props.data.avatar}
+        handleUploadAvatar={props.handleUploadAvatar}
+        handleFileUpload={props.handleFileUpload}
+      />
       <p className="text-black font-semibold">Email</p>
       <p className="border-b border-gray-300 pb-2">{props.data.email}</p>
       <FormData
