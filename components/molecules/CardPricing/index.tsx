@@ -1,8 +1,20 @@
+import { getAllPricing } from "@/services/pricing.services";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 export default function index(props: PricingList) {
+
   const { id, title, price, description, details } = props;
+
+  const [getPrice, setPrice] = useState([]);
+
+  const priceButton = () => {
+    setPrice([
+    ])
+    console.log("Button clicked")
+  }
+
+
   return (
     <>
       <div className="card relative block bg-white max-w-xs mx-auto mb-24 border border-gray-300 rounded-lg">
@@ -33,6 +45,7 @@ export default function index(props: PricingList) {
             <Link
               className="btn-solid-reg page-scroll hover:bg-white"
               href="/payment"
+              onClick={() => priceButton()}
             >
               Beli sekarang
             </Link>

@@ -1,8 +1,9 @@
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import PaymentPopup from "@/components/organisms/PaymentPopup";
+import { getAllPricing } from "@/services/pricing.services";
 
 const payment = () => {
   const [showPayment, setShowPayment] = useState(false);
@@ -76,12 +77,12 @@ const payment = () => {
                 <span className="text-xs text-gray-500 mb-px">/bulan</span>
               </div>
             </div>
-            <div className="px-8 mt-4">
+            {/* <div className="px-8 mt-4">
               <div className="flex items-end justify-between">
                 <span className="text-sm font-semibold">Pajak</span>
                 <span className="text-sm text-gray-500 mb-px">10%</span>
               </div>
-            </div>
+            </div> */}
             <div className="px-8 mt-4 border-t pt-4">
               <div className="flex items-end justify-between">
                 <span className="font-bold text-black">Total Pembayaran</span>
