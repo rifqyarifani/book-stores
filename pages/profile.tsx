@@ -15,6 +15,7 @@ export default function profile() {
   const [isActiveIndex, setIsActiveIndex] = useState(1);
   const [showMenu, setShowMenu] = useState(false);
   const [userData, setUserData] = useState({} as User);
+  const [selectedFile, setSelectedFile] = useState<File>();
 
   const [cookie] = useCookies(["token"]);
 
@@ -30,18 +31,22 @@ export default function profile() {
     const file = e.target.files as FileList;
     const test = file?.[0];
 
-    uploadAvatar(cookie.token, test, (status: boolean, res: any) => {
-      if (status) {
-        console.log("berhasil upload gambar", res);
-      } else {
-        console.log(res);
-      }
-    });
+    setSelectedFile(test);
   };
 
   const handleUploadAvatar = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("fitur masih belum bisa digunakan");
+    if (selectedFile) {
+      uploadAvatar(cookie.token, selectedFile, (status: boolean, res: any) => {
+        if (status) {
+          alert("berhasil upload gambar");
+          console.log(res);
+        } else {
+          alert("gagal upload gambar");
+          console.log(res);
+        }
+      });
+    }
   };
 
   useEffect(() => {
