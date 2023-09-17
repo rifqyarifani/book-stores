@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import CardPricing from "@/components/molecules/CardPricing";
-import pricingList from "@/services/pricing";
 import { getAllPricing } from "@/services/pricing.services";
 
 export default function index() {
