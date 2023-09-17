@@ -14,6 +14,7 @@ type Props = {
   type: "text" | "number" | "date" | "select";
   value?: string | number;
   focus?: boolean;
+  handleUpdateUserDetails: React.FormEventHandler<HTMLFormElement>;
 };
 
 export default function FormData(props: Props) {
@@ -50,8 +51,16 @@ export default function FormData(props: Props) {
     }
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    props.handleUpdateUserDetails(e);
+    setShowInput(!showInput);
+  };
+
   return (
-    <form className="flex justify-between py-2 border-b border-gray-300">
+    <form
+      onSubmit={handleSubmit}
+      className="flex justify-between py-2 border-b border-gray-300"
+    >
       <div className="w-full">
         <FormLabel label={label} name={name} />
         {!showInput && <p>{displayValue}</p>}
@@ -77,7 +86,12 @@ export default function FormData(props: Props) {
               >
                 Batal
               </BtnSolidSec>
-              <BtnSolidReg type="submit">Simpan</BtnSolidReg>
+              <BtnSolidReg
+                type="submit"
+                isShow={() => setShowInput(!showInput)}
+              >
+                Simpan
+              </BtnSolidReg>
             </div>
           </>
         )}

@@ -74,3 +74,24 @@ export const uploadAvatar = async (
     callback(false, error);
   }
 };
+
+export const updateUserDetails = async (
+  token: string,
+  data: User,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const result = await axios.put(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/user/update",
+      data,
+      config
+    );
+    callback(true, result);
+  } catch (error) {
+    callback(false, error);
+  }
+};

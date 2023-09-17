@@ -8,7 +8,11 @@ import Subscription from "@/components/organisms/Profile/Subscription";
 import Transactions from "@/components/organisms/Profile/Transactions";
 import Password from "@/components/organisms/Profile/Password";
 import BtnShowMenuMobile from "@/components/atoms/Profile/Button/BtnShowMenuMobile";
-import { getUserDetails, uploadAvatar } from "@/services/user.services";
+import {
+  getUserDetails,
+  updateUserDetails,
+  uploadAvatar,
+} from "@/services/user.services";
 import { useCookies } from "react-cookie";
 
 export default function profile() {
@@ -40,13 +44,34 @@ export default function profile() {
       uploadAvatar(cookie.token, selectedFile, (status: boolean, res: any) => {
         if (status) {
           alert("berhasil upload gambar");
-          console.log(res);
+          userDetails();
         } else {
           alert("gagal upload gambar");
           console.log(res);
         }
       });
     }
+  };
+
+  const handleUpdateUserDetails = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      name: e.currentTarget.username?.value,
+      gender: e.currentTarget.gender?.value,
+      date_of_birth: e.currentTarget.date_of_birth?.value,
+      phone_number: e.currentTarget.phone_number?.value,
+      address: e.currentTarget.address?.value,
+    };
+
+    updateUserDetails(cookie.token, data, (status: boolean, res: any) => {
+      if (status) {
+        alert("berhasil update data");
+        userDetails();
+      } else {
+        alert("gagal update data");
+        console.log(res);
+      }
+    });
   };
 
   useEffect(() => {
@@ -72,6 +97,7 @@ export default function profile() {
               data={userData}
               handleUploadAvatar={handleUploadAvatar}
               handleFileUpload={handleFileUpload}
+              handleUpdateUserDetails={handleUpdateUserDetails}
             />
           )}
           {isActiveIndex === 2 && <Subscription />}
