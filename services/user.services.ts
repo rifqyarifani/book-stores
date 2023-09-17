@@ -1,6 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 
-export const register = async (data: User, callback: Function) => {
+type RegisterData = {
+  email: string;
+  name: string;
+  password: string;
+};
+
+export const register = async (data: RegisterData, callback: Function) => {
   try {
     const result = await axios.post(
       process.env.NEXT_PUBLIC_BASE_URL + "/api/user/register",
