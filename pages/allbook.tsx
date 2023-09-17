@@ -8,9 +8,9 @@ export default function allbook() {
   const [dataList, setDataList] = useState([] as bookDetails[]);
 
   const getData = async () => {
-    const data = await getAllBooks();
-    if (data.data) {
-      setDataList(data.data);
+    const books = await getAllBooks();
+    if (books.data) {
+      setDataList(books.data);
     }
   };
 

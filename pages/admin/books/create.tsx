@@ -1,30 +1,28 @@
-import React, {useState} from 'react'
-import BackButton from "@/components/molecules/BackButton/index"
+import React, { useState } from "react";
+import BackButton from "@/components/molecules/BackButton/index";
 
 const Create = () => {
-    const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [category, setCategory] = useState("");
-    const [image, setImage] = useState("")
-    const [content, setContent] = useState("")
-    const [description, setDescription] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
+  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
 
-    const handleSaveBook = () => {
-        const data = {
-          title,
-          author,
-          category,
-          image,
-          content,
-          description
-        };
-    }
+  const handleSaveBook = () => {
+    const data = {
+      title,
+      author,
+      category,
+      image,
+      content,
+      description,
+    };
+  };
   return (
     <div className=" p-4">
-      <BackButton
-      id="books"
-      />
+      <BackButton id="books" />
       <h1 className=" text-3xl my-4">Create Book</h1>
       <div className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
@@ -89,7 +87,7 @@ const Create = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;
