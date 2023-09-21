@@ -57,3 +57,26 @@ export const getBooksByCategory = async (name: string) => {
     return error;
   }
 };
+
+export const deleteBook = async (id: number, token:string) =>{
+  try{
+    const result = await axios.delete(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/id/${id}`
+    )
+    return result.data
+  }
+  catch(error){
+    return error
+  }
+}
+
+export const addBook = async (data: bookDetails)=>{
+  try{
+    const result = await axios.post(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/add`, data
+    )
+  }
+  catch(error){
+    return error
+  }
+}

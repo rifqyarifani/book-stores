@@ -21,7 +21,6 @@ export default function profile() {
   const [showMenu, setShowMenu] = useState(false);
   const [userData, setUserData] = useState({} as User);
   const [selectedFile, setSelectedFile] = useState<File>();
-
   const [cookie] = useCookies(["token"]);
 
   const userDetails = () => {

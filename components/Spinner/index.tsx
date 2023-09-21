@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from 'react'
+import React, { useState, CSSProperties } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const override: CSSProperties = {
@@ -8,8 +8,8 @@ const override: CSSProperties = {
 };
 
 const Spinner = () => {
-    let [loading, setLoading] = useState(true);
-    let [color, setColor] = useState('#ffffff')
+  let [loading, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
   return (
     <div className="sweet-loading">
       <ClipLoader
@@ -21,7 +21,7 @@ const Spinner = () => {
         data-testid="loader"
       />
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

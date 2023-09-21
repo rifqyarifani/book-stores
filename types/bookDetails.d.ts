@@ -3,6 +3,6 @@ interface bookDetails {
   title: string;
   image: string;
   author: string;
-  category_id: string;
+  category_id: number;
   description: string;
 }

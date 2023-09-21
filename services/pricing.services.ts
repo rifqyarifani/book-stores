@@ -10,3 +10,14 @@ export const getAllPricing = async () => {
     console.log(error);
   }
 };
+
+export const getSinglePricing = async (id: number) => {
+  try {
+    const result = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/pricing/id/${id}`
+    );
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+};

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "@/components/molecules/BackButton/index";
+import { addBook } from "@/services/book.services";
 
 const Create = () => {
   const [loading, setLoading] = useState(false);
@@ -16,8 +17,8 @@ const Create = () => {
       author,
       category,
       image,
-      content,
       description,
+      content,
     };
   };
   return (
@@ -55,7 +56,7 @@ const Create = () => {
         <div className="my-4">
           <label className=" text-xl mr-4 text-gray-500">Image</label>
           <input
-            type="text"
+            type="file"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             className=" border-2 border-gray-500 px-4 py-2 w-full"
