@@ -66,36 +66,39 @@ export const getBooksByCategory = async (name: string) => {
   }
 };
 
-export const deleteBook = async (id: number, token:string) =>{
-  try{
-
+export const deleteBook = async (id: number, token: string) => {
+  try {
     const config = {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     };
     const result = await axios.delete(
-      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/id/${id}`, config
-    )
-    return result.data
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/id/${id}`,
+      config
+    );
+    return result.data;
+  } catch (error) {
+    return error;
   }
-  catch(error){
-    return error
-  }
-}
+};
 
-export const addBook = async (data: RegisterData, image:File, token:string)=>{
-  try{
-
+export const addBook = async (
+  data: RegisterData,
+  image: File,
+  token: string
+) => {
+  try {
     const form = new FormData();
     form.append("image", image);
-
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
 
     const result = await axios.post(
-      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/add`, data, config
-    )
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/add`,
+      data,
+      config
+    );
 
     const uploadBookImage = await axios.post(
       process.env.NEXT_PUBLIC_BASE_URL + "/api/book/add",
@@ -107,8 +110,7 @@ export const addBook = async (data: RegisterData, image:File, token:string)=>{
         },
       }
     );
+  } catch (error) {
+    return error;
   }
-  catch(error){
-    return error
-  }
-}
+};

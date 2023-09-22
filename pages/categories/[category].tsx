@@ -1,42 +1,47 @@
 import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { getBooksByCategory } from "@/services/book.services";
+import { getAllCategories, getBooksByCategory } from "@/services/book.services";
+import { GetStaticPropsContext } from "next";
 
-const categoryBooks = () => {
-  const [dataList, setDataList] = useState([] as bookDetails[]);
+type Props = {
+  result: bookDetails[];
+  category: string;
+};
 
-  const router = useRouter();
-  const category = router.query.category;
+export const getStaticPaths = async () => {
+  const res = await getAllCategories();
+  const categories = res.data;
+  const paths = categories.map((category: CategoryList) => ({
+    params: { category: category.name },
+  }));
 
-  const getData = async (category: string) => {
-    const param = category.toLowerCase();
-    if (param !== "fiksi" && param !== "sejarah" && param !== "gaya hidup") {
-      window.location.href = "/404";
-    }
-    const data = await getBooksByCategory(param);
-    if (data.data) {
-      setDataList(data.data);
-    }
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const category = params?.category;
+  const res = await getBooksByCategory(category as string);
+  const result = res.data;
+
+  return {
+    props: { result, category },
   };
+};
 
-  useEffect(() => {
-    if (category !== undefined) getData(category as string);
-  }, [category]);
-
+const categoryBooks = (props: Props) => {
+  const { result, category } = props;
   return (
     <>
       <Navbar />
-      <Breadcrumbs>
-        Categories / {category ? (category as string) : ""}
-      </Breadcrumbs>
+      <Breadcrumbs>Categories / {category ? category : ""}</Breadcrumbs>
       <div className="container px-4 sm:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {Object.keys(dataList).length > 0 ? (
-            dataList.map((item) => (
+          {Object.keys(result).length > 0 ? (
+            result.map((item) => (
               <div
                 className="relative overflow-hidden bg-white shadow-md rounded-xl"
                 key={item.id}
