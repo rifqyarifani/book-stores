@@ -41,19 +41,6 @@ export default function allbook() {
                     />
                   </div>
                 ))}
-              {Object.keys(dataList).length > 0 &&
-                dataList.map((item, i) => (
-                  <div key={i}>
-                    <CardBookCategory
-                      id={item.id}
-                      title={item.title}
-                      author={item.author}
-                      description={item.description}
-                      image={item.image}
-                      category_id={item.category_id}
-                    />
-                  </div>
-                ))}
             </div>
           </div>
         </div>

@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 import BackButton from "@/components/molecules/BackButton/index";
 import { deleteBook } from "@/services/book.services";
 import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
 
 const Delete = () => {
   const router = useRouter();
   const id = router.query.id;
+  const [cookie] = useCookies(["token"]);
+
+  const handleClick = () => {
+    const param = parseInt(id as string);
+    deleteBook(param, cookie.token as string);
+    alert("hapus berhasil");
+  };
 
   return (
     <div className=" p-4">
@@ -15,7 +23,10 @@ const Delete = () => {
         <h3 className=" text-2xl">
           Are you sure you want to delete this book?
         </h3>
-        <button className=" p-4 bg-red-600 text-white m-8 w-full">
+        <button
+          className=" p-4 bg-red-600 text-white m-8 w-full"
+          onClick={handleClick}
+        >
           {""}
           Yes, Delete it!
         </button>

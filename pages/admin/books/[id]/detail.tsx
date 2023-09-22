@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import BackButton from "@/components/molecules/BackButton/index";
-import { getSingleBook } from "@/services/book.services";
+import { getSingleBook, getAllCategories } from "@/services/book.services";
 import { useRouter } from "next/router";
 
 const Detail = () => {
   const [bookDetails, setBookDetails] = useState({} as bookDetails);
+  const [categoryList, setCategoryList] = useState([] as CategoryList[]);
 
   const router = useRouter();
   const id = router.query.id;
 
   const getData = async (param: number) => {
     const books = await getSingleBook(param);
+    const category = await getAllCategories();
     if (books.data) {
       setBookDetails(books.data);
+      setCategoryList(category.data);
     }
   };
 
@@ -37,23 +40,30 @@ const Detail = () => {
               <span>{bookDetails.id}</span>
             </div>
             <div className=" my-4">
-              <span className=" text-xl mr-4 text-gray-500">Title</span>
+              <span className=" text-xl mr-4 text-gray-500">Judul</span>
               <span>{bookDetails.title}</span>
             </div>
             <div className=" my-4">
-              <span className=" text-xl mr-4 text-gray-500">Category Id</span>
-              <span>{bookDetails.category_id}</span>
+              <span className=" text-xl mr-4 text-gray-500">Kategori</span>
+              <span>
+                {" "}
+                {categoryList.map((category) => {
+                  if (category.id === bookDetails.category_id) {
+                    return category.name;
+                  }
+                })}
+              </span>
             </div>
             <div className=" my-4">
-              <span className=" text-xl mr-4 text-gray-500">Author</span>
+              <span className=" text-xl mr-4 text-gray-500">Penulis</span>
               <span>{bookDetails.author}</span>
             </div>
             <div className=" my-4">
-              <span className=" text-xl mr-4 text-gray-500">Image</span>
+              <span className=" text-xl mr-4 text-gray-500">Gambar</span>
               <span>{bookDetails.image}</span>
             </div>
             <div className=" my-4">
-              <span className=" text-xl mr-4 text-gray-500">Description</span>
+              <span className=" text-xl mr-4 text-gray-500">Deskripsi</span>
               <span>{bookDetails.description}</span>
             </div>
           </div>
