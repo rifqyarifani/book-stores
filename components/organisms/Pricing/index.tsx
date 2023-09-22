@@ -16,8 +16,6 @@ export default function index() {
     pricing();
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <div

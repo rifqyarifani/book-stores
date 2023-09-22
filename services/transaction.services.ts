@@ -34,3 +34,31 @@ export const getTransactionsByUserId = async (
     callback(false, error);
   }
 };
+
+type NewTransactionData = {
+  account_number: number;
+  first_name: string;
+  second_name: string;
+};
+
+export const newTransaction = async (
+  token: string,
+  id: number,
+  data: NewTransactionData,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const result = await axios.post(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/transaction/new/${id}`,
+      data,
+      config
+    );
+    callback(true, result.data);
+  } catch (error) {
+    callback(false, error);
+  }
+};

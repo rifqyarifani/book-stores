@@ -42,5 +42,13 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  if (pathname.startsWith("/payment")) {
+    const url = req.nextUrl.clone();
+    if (!token) {
+      url.pathname = "/signin";
+      return NextResponse.redirect(url);
+    }
+
+    return NextResponse.next();
+  }
 }
