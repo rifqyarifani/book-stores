@@ -15,12 +15,14 @@ import {
   uploadAvatar,
 } from "@/services/user.services";
 import { useCookies } from "react-cookie";
+import { getTransactionsByUserId } from "@/services/transaction.services";
 
 export default function profile() {
   const [isActiveIndex, setIsActiveIndex] = useState(1);
   const [showMenu, setShowMenu] = useState(false);
   const [userData, setUserData] = useState({} as User);
   const [selectedFile, setSelectedFile] = useState<File>();
+  const [userTransactions, setUserTransactions] = useState<transaction[]>();
   const [cookie] = useCookies(["token"]);
 
   const userDetails = () => {
@@ -106,9 +108,20 @@ export default function profile() {
     });
   };
 
+  const getUserTransactions = (id: number) => {
+    getTransactionsByUserId(cookie.token, id, (status: boolean, res: any) => {
+      if (status) {
+        setUserTransactions(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     userDetails();
-  }, []);
+    if (userData.id) {
+      getUserTransactions(userData.id);
+    }
+  }, [userData.id]);
 
   return (
     <>
@@ -133,7 +146,7 @@ export default function profile() {
             />
           )}
           {isActiveIndex === 2 && <Subscription />}
-          {isActiveIndex === 3 && <Transactions />}
+          {isActiveIndex === 3 && <Transactions data={userTransactions} />}
           {isActiveIndex === 4 && (
             <Password handleChangePassword={handleChangePassword} />
           )}
