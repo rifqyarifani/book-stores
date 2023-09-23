@@ -51,7 +51,7 @@ const BookDetails = (props: bookDetails) => {
               </div>
             </div>
             <div className="text-center mt-24">
-              <Link className="btn-solid-lg" href="#">
+              <Link className="btn-solid-lg" href={`/read/${props.id}`}>
                 Baca Buku
               </Link>
             </div>

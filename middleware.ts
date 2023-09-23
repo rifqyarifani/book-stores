@@ -12,7 +12,11 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  if (pathname.startsWith("/profile") || pathname.startsWith("/payment")) {
+  if (
+    pathname.startsWith("/profile") ||
+    pathname.startsWith("/payment") ||
+    pathname.startsWith("/read")
+  ) {
     if (!token) {
       const url = req.nextUrl.clone();
       url.pathname = "/signin";

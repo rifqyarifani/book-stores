@@ -55,7 +55,11 @@ export default function Navbar() {
             scroll={false}
             href="/#header"
           >
-            <img src=".././images/vaca.svg" alt="alternative" className="h-8" />
+            <img
+              src="../.././images/vaca.svg"
+              alt="alternative"
+              className="h-8"
+            />
           </Link>
 
           <button

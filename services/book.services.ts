@@ -112,3 +112,23 @@ export const addBook = async (
     callback(false, error);
   }
 };
+
+export const readBook = async (
+  token: string,
+  id: number,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const result = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/read/${id}`,
+      config
+    );
+
+    callback(true, result.data);
+  } catch (error) {
+    callback(false, error);
+  }
+};
