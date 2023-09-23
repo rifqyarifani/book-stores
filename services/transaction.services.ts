@@ -35,6 +35,26 @@ export const getTransactionsByUserId = async (
   }
 };
 
+export const getTransactionsById = async (
+  token: string,
+  id: number,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const result = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/transaction/id/${id}`,
+      config
+    );
+    callback(true, result.data);
+  } catch (error) {
+    callback(false, error);
+  }
+};
+
 type NewTransactionData = {
   account_number: number;
   first_name: string;
