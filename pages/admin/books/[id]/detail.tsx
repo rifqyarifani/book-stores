@@ -26,8 +26,6 @@ const Detail = () => {
     }
   }, [id]);
 
-  console.log(bookDetails);
-
   return (
     <div className=" p-4">
       <BackButton id="books" />

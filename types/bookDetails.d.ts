@@ -1,8 +1,9 @@
 interface bookDetails {
   id: number;
   title: string;
-  image: string;
+  image?: string;
   author: string;
   category_id: number;
   description: string;
+  content?: string;
 }

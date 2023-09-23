@@ -132,3 +132,24 @@ export const readBook = async (
     callback(false, error);
   }
 };
+
+export const updateBook = async (
+  token: string,
+  data: bookDetails,
+  callback: Function
+) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const result = await axios.put(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/update`,
+      data,
+      config
+    );
+
+    callback(true, result.data);
+  } catch (error) {
+    callback(false, error);
+  }
+};

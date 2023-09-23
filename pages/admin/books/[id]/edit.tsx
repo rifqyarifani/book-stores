@@ -1,97 +1,142 @@
-import React, {useState} from 'react'
-import BackButton from "@/components/molecules/BackButton/index"
+import React, { useEffect, useState } from "react";
+import BackButton from "@/components/molecules/BackButton/index";
+import { useRouter } from "next/router";
+import { getSingleBook, updateBook } from "@/services/book.services";
+import { useCookies } from "react-cookie";
 
 const Edit = () => {
+  const [loading, setLoading] = useState(false);
+  const [bookDetails, setBookDetails] = useState({} as bookDetails);
+  const [cookie] = useCookies(["token"]);
 
-    const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState("How To Win Friends and Influence People");
-    const [author, setAuthor] = useState("Dale Carnegie");
-    const [category, setCategory] = useState("Self Improvement");
-    const [image, setImage] = useState("ini link gambar")
-    const [content, setContent] = useState("ini content")
-    const [description, setDescription] = useState("ini description")
+  const router = useRouter();
 
+  const getDetailBooks = async () => {
+    const id = parseInt(router.query.id as string);
 
-    const handleEditBook = () => {
-        const data = {
-          title,
-          author,
-          category,
-          image,
-          content,
-          description
-        };
+    const result = await getSingleBook(id);
+
+    if (!result.data) {
+      alert("Terjadi kesalahan");
+      window.location.href = "/admin/books";
+    } else {
+      setBookDetails(result.data);
     }
+  };
+
+  const handleEditBook = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const id = parseInt(router.query.id as string);
+    const title = e.currentTarget.book_title.value;
+    const author = e.currentTarget.author.value;
+    const category_id = e.currentTarget.category_id.value;
+    const content = e.currentTarget.content.value;
+    const description = e.currentTarget.description.value;
+
+    const data = {
+      id,
+      title,
+      author,
+      category_id,
+      content,
+      description,
+    };
+
+    updateBook(cookie.token, data, (status: boolean, res: any) => {
+      if (status) {
+        alert("ubah buku sukses");
+        window.location.href = "/admin/books";
+      } else {
+        alert("ubah buku gagal");
+      }
+    });
+  };
+
+  useEffect(() => {
+    getDetailBooks();
+  }, []);
+
   return (
     <div className=" p-4">
-      <BackButton
-      id="books"
-      />
+      <BackButton id="books" />
       <h1 className=" text-3xl my-4">Edit Book</h1>
-      <div className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+      <form
+        onSubmit={handleEditBook}
+        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto"
+      >
         <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Title</label>
+          <label htmlFor="book_title" className=" text-xl mr-4 text-gray-500">
+            Title
+          </label>
           <input
+            name="book_title"
+            id="book_title"
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            defaultValue={bookDetails?.title}
             className=" border-2 border-gray-500 px-4 py-2 w-full"
+            required
           />
         </div>
         <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Author</label>
+          <label htmlFor="author" className=" text-xl mr-4 text-gray-500">
+            Author
+          </label>
           <input
             type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            name="author"
+            id="author"
+            defaultValue={bookDetails?.author}
             className=" border-2 border-gray-500 px-4 py-2 w-full"
+            required
           />
         </div>
         <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Category</label>
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+          <label htmlFor="category_id" className=" text-xl mr-4 text-gray-500">
+            Category
+          </label>
+          <select
+            name="category_id"
+            id="category_id"
+            defaultValue={bookDetails?.category_id}
             className=" border-2 border-gray-500 px-4 py-2 w-full"
+            required
+          >
+            <option value={1}>Fiksi</option>
+            <option value={2}>Sejarah</option>
+            <option value={1}>Gaya Hidup</option>
+          </select>
+        </div>
+        <div className="my-4">
+          <label htmlFor="description" className=" text-xl mr-4 text-gray-500">
+            Description
+          </label>
+          <input
+            name="description"
+            id="description"
+            type="text"
+            defaultValue={bookDetails?.description}
+            className=" border-2 border-gray-500 px-4 py-2 w-full"
+            required
           />
         </div>
         <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Image</label>
+          <label htmlFor="content" className=" text-xl mr-4 text-gray-500">
+            Content
+          </label>
           <input
             type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            name="content"
+            id="content"
             className=" border-2 border-gray-500 px-4 py-2 w-full"
+            required
           />
         </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Description</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Content</label>
-          <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <button
-          className=" p-2 bg-sky-300 m-8 rounded-2xl"
-          onClick={handleEditBook}
-        >
-          Create
+        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+          Ubah
         </button>
-      </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;
