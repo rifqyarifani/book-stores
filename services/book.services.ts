@@ -5,7 +5,7 @@ type RegisterData = {
   author: string;
   description: string;
   content: string;
-  categoryId: number;
+  category_id: number;
 };
 
 export const getAllBooks = async () => {
@@ -84,23 +84,19 @@ export const deleteBook = async (id: number, token: string) => {
 export const addBook = async (
   data: RegisterData,
   image: File,
-  token: string
+  token: string,
+  callback: Function
 ) => {
   try {
     const form = new FormData();
+    form.append("title", data.title);
     form.append("image", image);
-
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    form.append("author", data.author);
+    form.append("description", data.description);
+    form.append("category_id", data.category_id.toLocaleString());
+    form.append("content", data.content);
 
     const result = await axios.post(
-      process.env.NEXT_PUBLIC_BASE_URL + `/api/book/add`,
-      data,
-      config
-    );
-
-    const uploadBookImage = await axios.post(
       process.env.NEXT_PUBLIC_BASE_URL + "/api/book/add",
       form,
       {
@@ -110,7 +106,9 @@ export const addBook = async (
         },
       }
     );
+
+    callback(true, result.data);
   } catch (error) {
-    return error;
+    callback(false, error);
   }
 };

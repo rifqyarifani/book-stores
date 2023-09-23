@@ -8,7 +8,7 @@ type RegisterData = {
   author: string;
   description: string;
   content: string;
-  categoryId: number;
+  category_id: number;
 };
 
 const Create = () => {
@@ -32,11 +32,22 @@ const Create = () => {
       author: e.currentTarget.author.value,
       description: e.currentTarget.description.value,
       content: e.currentTarget.content.value,
-      categoryId: e.currentTarget.categoryId.value,
+      category_id: e.currentTarget.categoryId.value,
     };
 
     if (selectedFile) {
-      addBook(data, selectedFile, cookie.token as string);
+      addBook(
+        data,
+        selectedFile,
+        cookie.token as string,
+        (status: boolean, res: any) => {
+          if (status) {
+            alert("tambah buku berhasil");
+          } else {
+            alert("tambah buku gagal");
+          }
+        }
+      );
     }
   };
 
