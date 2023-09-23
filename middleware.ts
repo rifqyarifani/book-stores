@@ -42,5 +42,35 @@ export async function middleware(req: NextRequest) {
     }
   }
 
+  if (pathname.startsWith("/admin")) {
+    if (!token) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/api/user/detail",
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token.value}` },
+        }
+      );
+
+      const result = await response.json();
+
+      if (!result.data.id || result.data.role !== "admin") {
+        const url = req.nextUrl.clone();
+        url.pathname = "/";
+        return NextResponse.redirect(url);
+      }
+    } catch (error) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+  }
+
   return NextResponse.next();
 }
