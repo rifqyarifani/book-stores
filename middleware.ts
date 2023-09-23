@@ -12,10 +12,10 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  if (pathname.startsWith("/profile")) {
+  if (pathname.startsWith("/profile") || pathname.startsWith("/payment")) {
     if (!token) {
       const url = req.nextUrl.clone();
-      url.pathname = "/";
+      url.pathname = "/signin";
       return NextResponse.redirect(url);
     }
 
@@ -32,23 +32,15 @@ export async function middleware(req: NextRequest) {
 
       if (!result.data.id) {
         const url = req.nextUrl.clone();
-        url.pathname = "/";
+        url.pathname = "/signin";
         return NextResponse.redirect(url);
       }
     } catch (error) {
       const url = req.nextUrl.clone();
-      url.pathname = "/";
-      return NextResponse.redirect(url);
-    }
-  }
-
-  if (pathname.startsWith("/payment")) {
-    const url = req.nextUrl.clone();
-    if (!token) {
       url.pathname = "/signin";
       return NextResponse.redirect(url);
     }
-
-    return NextResponse.next();
   }
+
+  return NextResponse.next();
 }
