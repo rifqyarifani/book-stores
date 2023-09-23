@@ -1,87 +1,120 @@
-import React, {useState} from 'react'
-import BackButton from "@/components/molecules/BackButton/index"
+import React, { useState, useEffect } from "react";
+import BackButton from "@/components/molecules/BackButton/index";
+import { getSinglePricing } from "@/services/pricing.services";
+import { useRouter } from "next/router";
+import { updatePricing } from "@/services/pricing.services";
+import { useCookies } from "react-cookie";
 
 const Edit = () => {
+  const [pricingDetails, setPricingDetails] = useState({} as PricingList);
+  const [cookie] = useCookies(["token"]);
+  const router = useRouter();
+  const id = router.query.id;
+  const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [duration, setDuration] = useState("");
+  const [description, setDescription] = useState("");
+  const [details, setDetails] = useState("");
 
-    const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState("Premium Non-Fiksi");
-    const [price, setPrice] = useState("49.999")
-    const [duration, setDuration] = useState('1 bulan')
-    const [description, setDescription] = useState('ini merupakan deskripsi')
-    const [details, setDetails] = useState("ini merupakan deskripsi")
-
-
-
-    const handleEditPricing = () => {
-        const data = {
-          title,
-          price,
-          duration,
-          description,
-          details
-        };
+  const getData = async (param: number) => {
+    const pricing = await getSinglePricing(param);
+    if (pricing.data) {
+      setPricingDetails(pricing.data);
+      setTitle(pricing.data.title);
+      setPrice(pricing.data.price);
+      setDuration(pricing.data.duration);
+      setDescription(pricing.data.description);
+      setDetails(pricing.data.details);
     }
+  };
+
+  useEffect(() => {
+    const param = parseInt(id as string);
+    getData(param);
+  }, [id]);
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    const param = parseInt(id as string);
+    const data = {
+      title: title,
+      price: price,
+      duration: duration,
+      description: description,
+      details: details,
+    };
+
+    updatePricing(param, data, cookie.token as string);
+    window.location.href = "/admin/pricing";
+  };
+
   return (
     <div className=" p-4">
-      <BackButton
-      id="pricing"
-      />
+      <BackButton id="pricing" />
       <h1 className=" text-3xl my-4">Edit Book</h1>
-      <div className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Price</label>
-          <input
-            type="text"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Duration</label>
-          <input
-            type="text"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Description</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className=" text-xl mr-4 text-gray-500">Details</label>
-          <input
-            type="text"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
-            className=" border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <button
-          className=" p-2 bg-sky-300 m-8 rounded-2xl"
-          onClick={handleEditPricing}
-        >
-          Create
+      <form
+        onSubmit={handleSubmit}
+        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto gap-y-2"
+      >
+        <label htmlFor="title" className=" text-xl mr-4 text-gray-500">
+          Title
+        </label>
+        <input
+          type="text"
+          id="title"
+          placeholder={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className=" border-2 border-gray-500 px-4 py-2 w-full"
+        />
+        <label htmlFor="price" className=" text-xl mr-4 text-gray-500">
+          Price
+        </label>
+        <input
+          type="text"
+          id="price"
+          placeholder={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className=" border-2 border-gray-500 px-4 py-2 w-full"
+        />
+        <label htmlFor="duration" className=" text-xl mr-4 text-gray-500">
+          Duration
+        </label>
+        <input
+          type="text"
+          id="duration"
+          placeholder={duration}
+          onChange={(e) => setDuration(e.target.value)}
+          className=" border-2 border-gray-500 px-4 py-2 w-full"
+        />
+        <label htmlFor="description" className=" text-xl mr-4 text-gray-500">
+          Description
+        </label>
+        <input
+          type="text"
+          id="description"
+          placeholder={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className=" border-2 border-gray-500 px-4 py-2 w-full"
+        />
+        <label htmlFor="details" className=" text-xl mr-4 text-gray-500">
+          Details
+        </label>
+        <input
+          type="text"
+          id="details"
+          placeholder={details}
+          onChange={(e) => setDetails(e.target.value)}
+          className=" border-2 border-gray-500 px-4 py-2 w-full"
+        />
+        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+          Update
         </button>
-      </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;

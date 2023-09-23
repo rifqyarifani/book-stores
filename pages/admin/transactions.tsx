@@ -83,12 +83,6 @@ const Transactions = () => {
                         >
                           <AiOutlineEdit className=" text-2xl text-yellow-600" />
                         </Link>
-                        <Link
-                          className=" nav-link page-scroll"
-                          href={`/admin/transactions/${transaksi.id}/delete`}
-                        >
-                          <MdOutlineDelete className=" text-2xl text-red-600" />
-                        </Link>
                       </div>
                     </td>
                   </tr>
