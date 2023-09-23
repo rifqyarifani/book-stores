@@ -46,13 +46,17 @@ const payment = (props: PricingList) => {
     newTransaction(cookie.token, id, data, (status: boolean, res: any) => {
       if (status) {
         setShowPayment(!showPayment);
-        alert("Transaksi berhasil. Silahkan tunggu proses konfirmasi");
-        router.push("/profile");
+        alert("Transaksi berhasil. Silahkan melakukan pembayaran");
       } else {
         alert("Transaksi Gagal");
         console.log(res.response.data.message);
       }
     });
+  };
+
+  const handleConfirmation = () => {
+    setShowPayment(!showPayment);
+    router.push("/profile");
   };
 
   return (
@@ -167,9 +171,7 @@ const payment = (props: PricingList) => {
           </div>
         </div>
       </form>
-      {showPayment && (
-        <PaymentPopup onClick={() => setShowPayment(!showPayment)} />
-      )}
+      {showPayment && <PaymentPopup onClick={handleConfirmation} />}
       <Footer />
     </>
   );
