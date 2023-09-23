@@ -82,3 +82,23 @@ export const newTransaction = async (
     callback(false, error);
   }
 };
+
+type updateTransaction = {
+  status: string
+}
+
+export const updateTransaction = async(token:string, id:number, data:updateTransaction)=>{
+  try{
+    const config = {
+      headers: { Authorization : `Bearer ${token}`}
+    }
+
+    const result = await axios.put(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/transaction/id/${id}`, data, config)
+
+      return result.data
+  }
+  catch(error){
+    return error
+  }
+}
