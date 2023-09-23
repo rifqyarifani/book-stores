@@ -30,12 +30,12 @@ const Transactions = () => {
   return (
     <>
       <Navbar />
-      <div className=" mt-20">
-        <h1 className=" text-center text-regular">Transactions</h1>
+      <div className=" mt-20 container">
+        <h1 className=" text-center text-regular mb-8">Transactions</h1>
         {loading ? (
           <Spinner />
         ) : (
-          <table className=" w-5/6 border-separate border-spacing-2 mx-auto">
+          <table className="w-full border-separate border-spacing-2 mx-auto">
             <thead>
               <tr>
                 <th className=" border border-slate-600 rounded-md">
@@ -43,7 +43,7 @@ const Transactions = () => {
                 </th>
                 <th className=" border border-slate-600 rounded-md">User Id</th>
                 <th className=" border border-slate-600 rounded-md">
-                  Nama User
+                  Nama di Rekening
                 </th>
                 <th className=" border border-slate-600 rounded-md max-md:hidden">
                   Status

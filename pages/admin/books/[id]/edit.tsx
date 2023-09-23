@@ -57,12 +57,12 @@ const Edit = () => {
   }, []);
 
   return (
-    <div className=" p-4">
+    <div className=" p-4 container">
       <BackButton id="books" />
-      <h1 className=" text-3xl my-4">Edit Book</h1>
+      <h1 className=" text-3xl my-4 text-center py-8">Edit Book</h1>
       <form
         onSubmit={handleEditBook}
-        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto"
+        className=" flex flex-col border-2 border-regular rounded-xl w-[600px] p-4 mx-auto"
       >
         <div className="my-4">
           <label htmlFor="book_title" className=" text-xl mr-4 text-gray-500">
@@ -131,7 +131,7 @@ const Edit = () => {
             required
           />
         </div>
-        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+        <button className=" p-2 btn-solid-reg m-8 rounded-2xl" type="submit">
           Ubah
         </button>
       </form>

@@ -30,9 +30,9 @@ const Books = () => {
   return (
     <>
       <Navbar />
-      <div className=" mt-20">
+      <div className=" mt-20 container">
         <div className=" flex items-center justify-center relative">
-          <h1 className=" text-center text-regular">Books</h1>
+          <h1 className=" text-center text-regular mb-8">Books</h1>
           <Link
             className=" nav-link page-scroll absolute right-32"
             href="/admin/books/create"
@@ -43,7 +43,7 @@ const Books = () => {
         {loading ? (
           <Spinner />
         ) : (
-          <table className=" w-5/6 border-separate border-spacing-2 mx-auto">
+          <table className="border-separate border-spacing-2 mx-auto">
             <thead>
               <tr>
                 <th className=" border border-slate-600 rounded-md">No</th>

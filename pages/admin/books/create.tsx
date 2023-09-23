@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BackButton from "@/components/molecules/BackButton/index";
 import { addBook } from "@/services/book.services";
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 type RegisterData = {
   title: string;
@@ -14,6 +15,7 @@ type RegisterData = {
 const Create = () => {
   const [cookie] = useCookies(["token"]);
   const [selectedFile, setSelectedFile] = useState<File>();
+  const router = useRouter();
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files as FileList;
@@ -43,6 +45,7 @@ const Create = () => {
         (status: boolean, res: any) => {
           if (status) {
             alert("tambah buku berhasil");
+            router.push("/admin/books");
           } else {
             alert("tambah buku gagal");
           }
@@ -52,11 +55,11 @@ const Create = () => {
   };
 
   return (
-    <div className=" p-4">
+    <div className=" p-4 container">
       <BackButton id="books" />
-      <h1 className=" text-3xl my-4">Create Book</h1>
+      <h1 className=" text-3xl my-4 text-center py-8">Create Book</h1>
       <form
-        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto"
+        className=" flex flex-col border-2 border-regular rounded-xl w-[600px] p-4 mx-auto"
         onSubmit={handleSubmit}
       >
         <label htmlFor="judul" className=" text-xl mr-4 text-gray-500">
@@ -120,7 +123,7 @@ const Create = () => {
           className=" border-2 border-gray-500 px-4 py-2 w-full"
           required
         />
-        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+        <button className=" p-2 btn-solid-reg m-8 rounded-2xl" type="submit">
           Buat
         </button>
       </form>

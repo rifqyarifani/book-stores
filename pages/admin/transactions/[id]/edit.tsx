@@ -38,22 +38,28 @@ const Edit = () => {
   return (
     <div className=" p-4">
       <BackButton id="transactions" />
-      <h1 className=" text-3xl my-4">Ubah Status Transaksi</h1>
+      <h1 className=" text-3xl my-4 text-center py-8">Ubah Status Transaksi</h1>
       <form
         onSubmit={handleEditTransaction}
-        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto"
+        className=" flex flex-col border-2 border-regular rounded-xl w-[600px] p-4 mx-auto"
       >
         <label htmlFor="status" className=" text-xl mr-4 text-gray-500">
           Status
         </label>
-        <select id="status" name="status" defaultValue={""} required>
+        <select
+          id="status"
+          name="status"
+          defaultValue={""}
+          required
+          className="border-2 p-2 mt-4"
+        >
           <option value="" disabled>
             Pilih Status
           </option>
           <option value="failed">Failed</option>
           <option value="success">Success</option>
         </select>
-        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+        <button className=" p-2 btn-solid-reg m-8 rounded-2xl" type="submit">
           Ubah
         </button>
       </form>

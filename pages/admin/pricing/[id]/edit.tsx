@@ -48,16 +48,16 @@ const Edit = () => {
     };
 
     updatePricing(param, data, cookie.token as string);
-    window.location.href = "/admin/pricing";
+    router.push("/admin/pricing");
   };
 
   return (
-    <div className=" p-4">
+    <div className=" p-4 container">
       <BackButton id="pricing" />
-      <h1 className=" text-3xl my-4">Edit Book</h1>
+      <h1 className=" text-3xl my-4 text-center py-8">Edit Pricing</h1>
       <form
         onSubmit={handleSubmit}
-        className=" flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto gap-y-2"
+        className=" flex flex-col border-2 border-regular rounded-xl w-[600px] p-4 mx-auto gap-y-2"
       >
         <label htmlFor="title" className=" text-xl mr-4 text-gray-500">
           Title
@@ -65,7 +65,7 @@ const Edit = () => {
         <input
           type="text"
           id="title"
-          placeholder={title}
+          defaultValue={title}
           onChange={(e) => setTitle(e.target.value)}
           className=" border-2 border-gray-500 px-4 py-2 w-full"
         />
@@ -75,7 +75,7 @@ const Edit = () => {
         <input
           type="text"
           id="price"
-          placeholder={price}
+          defaultValue={price}
           onChange={(e) => setPrice(e.target.value)}
           className=" border-2 border-gray-500 px-4 py-2 w-full"
         />
@@ -85,7 +85,7 @@ const Edit = () => {
         <input
           type="text"
           id="duration"
-          placeholder={duration}
+          defaultValue={duration}
           onChange={(e) => setDuration(e.target.value)}
           className=" border-2 border-gray-500 px-4 py-2 w-full"
         />
@@ -95,7 +95,7 @@ const Edit = () => {
         <input
           type="text"
           id="description"
-          placeholder={description}
+          defaultValue={description}
           onChange={(e) => setDescription(e.target.value)}
           className=" border-2 border-gray-500 px-4 py-2 w-full"
         />
@@ -105,11 +105,11 @@ const Edit = () => {
         <input
           type="text"
           id="details"
-          placeholder={details}
+          defaultValue={details}
           onChange={(e) => setDetails(e.target.value)}
           className=" border-2 border-gray-500 px-4 py-2 w-full"
         />
-        <button className=" p-2 bg-sky-300 m-8 rounded-2xl" type="submit">
+        <button className=" p-2 btn-solid-reg m-8 rounded-2xl" type="submit">
           Update
         </button>
       </form>

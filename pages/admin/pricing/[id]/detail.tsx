@@ -24,10 +24,11 @@ const Detail = () => {
   }, [id]);
 
   return (
-    <div className=" p-4">
+    <div className=" p-4 container">
       <BackButton id="pricing" />
-      <h1 className=" text-3xl my-4">Show Pricing</h1>
-      <div className=" flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
+      <h1 className=" text-3xl my-4 text-center py-8">Show Pricing</h1>
+
+      <div className=" flex flex-col border-2 border-regular rounded-xl w-fit p-4">
         {Object.keys(pricingDetails).length > 0 ? (
           <>
             <div className=" my-4">

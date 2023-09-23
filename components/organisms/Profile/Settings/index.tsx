@@ -10,6 +10,7 @@ type Props = {
 };
 
 export default function Settings(props: Props) {
+  const date = props.data.date_of_birth?.toString().slice(0, 10);
   return (
     <>
       <h1 className="text-center mb-16">Profil Pengguna</h1>
@@ -39,7 +40,7 @@ export default function Settings(props: Props) {
         label="Tanggal Lahir"
         name="date_of_birth"
         type="date"
-        value={props.data.date_of_birth?.toDateString()}
+        value={date}
         focus={true}
         handleUpdateUserDetails={props.handleUpdateUserDetails}
       />

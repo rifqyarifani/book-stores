@@ -32,10 +32,10 @@ const Detail = () => {
   console.log(transactionDetails);
 
   return (
-    <div className=" p-4">
+    <div className=" p-4 container">
       <BackButton id="transactions" />
-      <h1 className=" text-3xl my-4">Show Transaction</h1>
-      <div className=" flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
+      <h1 className=" text-3xl my- text-center py-8">Show Transaction</h1>
+      <div className=" flex flex-col border-2 border-regular rounded-xl w-full p-4">
         {Object.keys(transactionDetails).length > 0 ? (
           <>
             <div className=" my-4">

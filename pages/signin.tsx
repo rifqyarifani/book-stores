@@ -30,7 +30,7 @@ export default function Signin() {
       if (status) {
         alert("login berhasil");
         setCookie("token", res.token, { maxAge: 3600 });
-        router.push("/profile");
+        router.push("/");
       } else {
         alert("login gagal");
       }

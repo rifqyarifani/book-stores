@@ -27,12 +27,12 @@ const Pricing = () => {
   return (
     <>
       <Navbar />
-      <div className=" mt-20">
-        <h1 className=" text-center text-regular">Pricing</h1>
+      <div className=" mt-20 container">
+        <h1 className=" text-center text-regular mb-8">Pricing</h1>
         {loading ? (
           <Spinner />
         ) : (
-          <table className=" w-5/6 border-separate border-spacing-2 mx-auto">
+          <table className=" w-full border-separate border-spacing-2 mx-auto">
             <thead>
               <tr>
                 <th className=" border border-slate-600 rounded-md">No</th>
