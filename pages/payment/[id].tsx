@@ -7,6 +7,7 @@ import { getAllPricing, getSinglePricing } from "@/services/pricing.services";
 import { GetStaticPropsContext } from "next";
 import { useCookies } from "react-cookie";
 import { newTransaction } from "@/services/transaction.services";
+import { useRouter } from "next/router";
 
 export const getStaticPaths = async () => {
   const res = await getAllPricing();
@@ -32,6 +33,7 @@ const payment = (props: PricingList) => {
   const { id, title, price } = props;
   const [showPayment, setShowPayment] = useState(false);
   const [cookie] = useCookies(["token"]);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +46,8 @@ const payment = (props: PricingList) => {
     newTransaction(cookie.token, id, data, (status: boolean, res: any) => {
       if (status) {
         setShowPayment(!showPayment);
+        alert("Transaksi berhasil. Silahkan tunggu proses konfirmasi");
+        router.push("/profile");
       } else {
         alert("Transaksi Gagal");
         console.log(res.response.data.message);

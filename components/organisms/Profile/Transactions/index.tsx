@@ -76,7 +76,9 @@ export default function Transactions(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} - <span>Rp. {item.price} - </span>
-                        <span>{item.updatedAt?.toLocaleString()} - </span>
+                        <span>
+                          {item.updatedAt?.toString().slice(0, 10)} -{" "}
+                        </span>
                         <span>{item.status}</span>
                       </p>
                     </li>
@@ -97,7 +99,7 @@ export default function Transactions(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} - <span>Rp. {item.price} - </span>
-                        <span>{item.updatedAt?.toLocaleString()}</span>
+                        <span>{item.updatedAt?.toString().slice(0, 10)}</span>
                       </p>
                     </li>
                   );
@@ -117,7 +119,7 @@ export default function Transactions(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} - <span>Rp. {item.price} - </span>
-                        <span>{item.updatedAt?.toLocaleString()}</span>
+                        <span>{item.updatedAt?.toString().slice(0, 10)}</span>
                       </p>
                     </li>
                   );
@@ -137,7 +139,7 @@ export default function Transactions(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} - <span>Rp. {item.price} - </span>
-                        <span>{item.updatedAt?.toLocaleString()}</span>
+                        <span>{item.updatedAt?.toString().slice(0, 10)}</span>
                       </p>
                     </li>
                   );

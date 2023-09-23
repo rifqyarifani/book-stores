@@ -57,7 +57,7 @@ export default function Subscription(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} -{" "}
-                        <span>{item.expiry_date.toString()}</span>
+                        <span>{item.expiry_date.toString().slice(0, 10)}</span>
                       </p>
                     </li>
                   );
@@ -77,7 +77,7 @@ export default function Subscription(props: Props) {
                     <li className="pb-2" key={item.id}>
                       <p>
                         {item.title} -{" "}
-                        <span>{item.expiry_date.toString()}</span>
+                        <span>{item.expiry_date.toString().slice(0, 10)}</span>
                       </p>
                     </li>
                   );
