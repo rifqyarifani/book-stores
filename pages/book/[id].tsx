@@ -38,7 +38,7 @@ const BookDetails = (props: bookDetails) => {
           <>
             <div className="flex items-start">
               <img
-                src={`../${props.image}`}
+                src={`${props.image}`}
                 alt="alternative"
                 className="w-1/4 object-contain"
               />

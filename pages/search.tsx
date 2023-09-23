@@ -70,7 +70,7 @@ const search = () => {
                       <Link href={`/book/${item.id}`}>
                         <img
                           className="m-auto mt-8 mb-4 overflow-hidden w-36 h-44"
-                          src={"../" + item.image}
+                          src={item.image}
                           alt="picturebook"
                         />
                       </Link>
