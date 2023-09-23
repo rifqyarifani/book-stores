@@ -6,6 +6,7 @@ interface User {
   avatar?: string;
   address?: string;
   phone_number?: number;
+  role?: string;
   date_of_birth?: Date;
   gender?: "male" | "female";
 }

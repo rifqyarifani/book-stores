@@ -1,6 +1,7 @@
 // import "@/styles/styles.css";
 // import "@/styles/swiper.css";
 // import "@/styles/magnific-popup.css";
+import { AuthProvider } from "@/context/useAuth";
 import "@/styles/globals.css";
 // import "@/styles/fontawesome-all.css";
 import type { AppProps } from "next/app";
@@ -11,13 +12,16 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>VACA</title>
-        
+
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
           rel="stylesheet"
         />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet"
+        />
         <link
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
           rel="stylesheet"
@@ -28,7 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
         <link rel="icon" href="/images/vaca logo.svg" />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   );
 }

@@ -4,7 +4,6 @@ import Navbar from "@/components/organisms/Navbar";
 import Link from "next/link";
 import { login } from "@/services/user.services";
 import { useCookies } from "react-cookie";
-import { useRouter } from "next/router";
 
 type Res = {
   message: string;
