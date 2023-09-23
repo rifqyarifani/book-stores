@@ -34,7 +34,7 @@ type Props = {
 const BookDetails = (props: Props) => {
   const { id } = props;
   const bookId = parseInt(id);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [content, setContent] = useState<string>();
   const [cookie] = useCookies(["token"]);
 
@@ -57,7 +57,20 @@ const BookDetails = (props: Props) => {
       <Navbar />
       <Breadcrumbs>Baca</Breadcrumbs>
       <div className="container px-4 md:px-8 py-8 h-60 flex justify-center items-center">
-        {loading ? <Spinner /> : <p>{content}</p>}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {content ? (
+              <p>{content}</p>
+            ) : (
+              <p>
+                Anda tidak memiliki langganan aktif. Silakan mulai berlangganan
+                untuk membaca buku
+              </p>
+            )}
+          </>
+        )}
       </div>
       <Footer />
     </>
