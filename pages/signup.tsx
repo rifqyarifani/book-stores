@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Link from "next/link";
 import { register } from "@/services/user.services";
+import { useRouter } from "next/router";
 
 type RegisterData = {
   email: string;
@@ -11,11 +12,13 @@ type RegisterData = {
 };
 
 export default function Signup() {
+  const router = useRouter();
+
   const handleRegister = (data: RegisterData) => {
     register(data, (status: boolean, res: User) => {
       if (status) {
         alert("register berhasil");
-        window.location.href = "/signin";
+        router.push("/signin");
       } else {
         alert("register gagal");
       }

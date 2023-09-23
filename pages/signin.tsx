@@ -4,6 +4,7 @@ import Navbar from "@/components/organisms/Navbar";
 import Link from "next/link";
 import { login } from "@/services/user.services";
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 type Res = {
   message: string;
@@ -22,16 +23,16 @@ type LoginData = {
 
 export default function Signin() {
   const [, setCookie] = useCookies(["token"]);
+  const router = useRouter();
 
   const handleLogin = (data: LoginData) => {
     login(data, (status: boolean, res: Res) => {
       if (status) {
         alert("login berhasil");
         setCookie("token", res.token, { maxAge: 3600 });
-        window.location.href = "/";
+        router.push("/profile");
       } else {
         alert("login gagal");
-        console.log(res.response?.data.message);
       }
     });
   };
