@@ -2,10 +2,9 @@ import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
 import Spinner from "@/components/Spinner";
-import React, { useEffect, useRef, useState, CSSProperties } from "react";
-import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
 import { searchBook } from "@/services/book.services";
-import { ClipLoader } from "react-spinners";
+import CardBookCategory from "@/components/molecules/CardBookCategory";
 
 const search = () => {
   const [dataList, setDataList] = useState([] as bookDetails[]);
@@ -62,39 +61,19 @@ const search = () => {
             <div className="container px-4 sm:px-8">
               {dataList.length > 0 ? (
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {dataList.map((item) => (
-                    <div
-                      className="relative overflow-hidden bg-white shadow-md rounded-xl"
-                      key={item.id}
-                    >
-                      <Link href={`/book/${item.id}`}>
-                        <img
-                          className="m-auto mt-8 mb-4 overflow-hidden w-36 h-44"
-                          src={item.image}
-                          alt="picturebook"
+                  {Object.keys(dataList).length > 0 &&
+                    dataList.map((item, i) => (
+                      <div key={i}>
+                        <CardBookCategory
+                          id={item.id}
+                          title={item.title}
+                          author={item.author}
+                          description={item.description}
+                          image={item.image}
+                          category_id={item.category_id}
                         />
-                      </Link>
-                      <div className="px-4 text-left">
-                        <h5 className="overflow-hidden overflow-ellipsis whitespace-nowrap">
-                          {item.title}
-                        </h5>
-                        <p className="">{item.author}</p>
-                        <p className="overflow-hidden overflow-ellipsis whitespace-nowrap p-small">
-                          {item.description}
-                        </p>
-                        <span className="rating-more">
-                          <img
-                            className="rating"
-                            src="/svg/star5.svg"
-                            alt="Rating"
-                          />
-                          <Link className="more" href={`/book/${item.id}`}>
-                            Selengkapnya
-                          </Link>
-                        </span>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               ) : (
                 <h1 className=" text-center mt-8 ">Buku tidak ditemukan</h1>
